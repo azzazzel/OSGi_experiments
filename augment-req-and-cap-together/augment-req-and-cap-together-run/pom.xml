@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>osgi.experiments</groupId>
+		<artifactId>augment-req-and-cap-together</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>augment-req-and-cap-together-run</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>augment-req-and-cap-together</groupId>
+			<artifactId>augment-req-and-cap-together-A</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>augment-req-and-cap-together</groupId>
+			<artifactId>augment-req-and-cap-together-C</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>augment-req-and-cap-together</groupId>
+			<artifactId>augment-req-and-cap-together-B</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi.enroute.pom.distro</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>biz.aQute.bnd</groupId>
+				<artifactId>bnd-export-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<resolve>true</resolve>
+					<bndruns>
+						<bndrun>1_A_req_B.bndrun</bndrun>
+						<bndrun>2_B_req_C.bndrun</bndrun>
+						<bndrun>3_1_cr_A_req_B_req_C.bndrun</bndrun>
+						<!-- doesn't resolve 
+						<bndrun>3_1_rc_A_req_B_req_C.bndrun</bndrun>
+						-->
+						<bndrun>3_2_cr_A_req_B_req_C.bndrun</bndrun>
+						<bndrun>3_2_rc_A_req_B_req_C.bndrun</bndrun>
+					</bndruns>
+					<failOnChanges>false</failOnChanges>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>export</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

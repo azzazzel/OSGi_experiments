@@ -1,0 +1,17 @@
+-standalone: 
+		
+-runfw: org.eclipse.osgi;version='[3.10,4)'
+-runee: JavaSE-1.8
+
+##
+## Augment B to satisfy A 
+## -------------------------
+## This works - both A and B are exported
+##
+
+-augment.B: \
+	augment-req-and-cap-together-B; \
+		capability:="contract1"
+
+-runrequires: osgi.identity;filter:='(osgi.identity=augment-req-and-cap-together-A)'
+

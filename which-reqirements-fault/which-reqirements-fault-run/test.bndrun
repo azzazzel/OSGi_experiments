@@ -1,0 +1,6 @@
+-standalone: 
+		
+-runfw: org.eclipse.osgi;version='[3.10,4)'
+-runee: JavaSE-1.8
+
+-runrequires: osgi.identity;filter:='(osgi.identity=which-reqirements-fault-A)'
